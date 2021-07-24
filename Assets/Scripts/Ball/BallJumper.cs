@@ -13,16 +13,13 @@ public class BallJumper : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void Jump()
     {
-        if(collision.gameObject.TryGetComponent(out PlatformSegment segment))
+        if (_jumped)
         {
-            if (_jumped)
-            {
-                return;
-            }
-            StartCoroutine(ProcessJump());
+            return;
         }
+        StartCoroutine(ProcessJump());
     }
 
     private IEnumerator ProcessJump()
