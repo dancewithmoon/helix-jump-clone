@@ -322,7 +322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelCount: 10
   _additionalScale: 3
-  _distanceBetweenPlatforms: 1
+  _distanceBetweenPlatforms: 2
   _beamPrefab: {fileID: 1577509753124746247, guid: d5a5c03a6d7069044afd4b1ad42f79ab,
     type: 3}
   _startPlatform: {fileID: 3477164675963103174, guid: 8fd40d756df6c2644a64b59170f2acc9,
@@ -346,7 +346,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 94
   m_CollisionDetection: 0
 --- !u!114 &700649006
 MonoBehaviour:
@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 1451663383}
   - component: {fileID: 1451663382}
   m_Layer: 5
-  m_Name: Canvas - Swipe
+  m_Name: Canvas - Swipe Input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

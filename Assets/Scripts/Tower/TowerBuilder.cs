@@ -16,7 +16,7 @@ public class TowerBuilder : MonoBehaviour
 
     private readonly float _startAndFinishAdditionalScale = 0.5f;
 
-    public float BeamScaleY => _levelCount * DistanceBetweenPlatformsCoef + _startAndFinishAdditionalScale + _additionalScale * DistanceBetweenPlatformsCoef;
+    public float BeamScaleY => _levelCount * DistanceBetweenPlatformsCoef + _startAndFinishAdditionalScale*2 + _additionalScale;
     private float DistanceBetweenPlatformsCoef => _distanceBetweenPlatforms / 2f;
 
 
@@ -36,7 +36,7 @@ public class TowerBuilder : MonoBehaviour
     private IEnumerator SpawnPlatforms(Transform beam)
     {
         Vector3 spawnPosition = beam.position;
-        spawnPosition.y += beam.localScale.y - _additionalScale * _distanceBetweenPlatforms;
+        spawnPosition.y += beam.localScale.y - _additionalScale * 2;
 
         void SpawnPlatformWithDefaultParams(Platform platform)
         {
