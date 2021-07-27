@@ -323,7 +323,7 @@ MonoBehaviour:
   _levelCount: 10
   _additionalScale: 3
   _distanceBetweenPlatforms: 2
-  _beamPrefab: {fileID: 1577509753124746247, guid: d5a5c03a6d7069044afd4b1ad42f79ab,
+  _beamPrefab: {fileID: 153021157818875840, guid: d5a5c03a6d7069044afd4b1ad42f79ab,
     type: 3}
   _startPlatform: {fileID: 3477164675963103174, guid: 8fd40d756df6c2644a64b59170f2acc9,
     type: 3}

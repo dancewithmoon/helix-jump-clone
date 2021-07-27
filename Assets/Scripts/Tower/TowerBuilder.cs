@@ -9,7 +9,7 @@ public class TowerBuilder : MonoBehaviour
     [SerializeField] private float _distanceBetweenPlatforms;
 
     [Header("Prefabs")]
-    [SerializeField] private Transform _beamPrefab;
+    [SerializeField] private Beam _beamPrefab;
     [SerializeField] private StartPlatform _startPlatform;
     [SerializeField] private FinishPlatform _finishPlatform;
     [SerializeField] private Platform[] _platforms;
@@ -27,16 +27,16 @@ public class TowerBuilder : MonoBehaviour
 
     private void Build()
     {
-        Transform beam = Instantiate(_beamPrefab, transform);
-        beam.localScale = new Vector3(beam.localScale.x, BeamScaleY, beam.localScale.z);
+        Beam beam = Instantiate(_beamPrefab, transform);
+        beam.transform.localScale = new Vector3(beam.transform.localScale.x, BeamScaleY, beam.transform.localScale.z);
 
         StartCoroutine(SpawnPlatforms(beam));
     }
 
-    private IEnumerator SpawnPlatforms(Transform beam)
+    private IEnumerator SpawnPlatforms(Beam beam)
     {
-        Vector3 spawnPosition = beam.position;
-        spawnPosition.y += beam.localScale.y - _additionalScale * 2;
+        Vector3 spawnPosition = beam.transform.position;
+        spawnPosition.y += beam.transform.localScale.y - _additionalScale * 2;
 
         void SpawnPlatformWithDefaultParams(Platform platform)
         {
