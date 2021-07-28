@@ -20,7 +20,7 @@ public class TowerBuilder : MonoBehaviour
     private float DistanceBetweenPlatformsCoef => _distanceBetweenPlatforms / 2f;
 
 
-    private void Start()
+    private void Awake()
     {
         Build();
     }
