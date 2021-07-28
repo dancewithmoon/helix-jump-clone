@@ -459,7 +459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _directionOffset: {x: 0, y: 0.1, z: 0}
-  _distanceToBall: 8
+  _distanceToBall: 6
 --- !u!1 &1451663381
 GameObject:
   m_ObjectHideFlags: 0
