@@ -16,7 +16,7 @@ public class TowerBuilder : MonoBehaviour
 
     private readonly float _startAndFinishAdditionalScale = 0.5f;
 
-    public float BeamScaleY => _levelCount * DistanceBetweenPlatformsCoef + _startAndFinishAdditionalScale*2 + _additionalScale;
+    private float BeamScaleY => _levelCount * DistanceBetweenPlatformsCoef + _startAndFinishAdditionalScale*2 + _additionalScale;
     private float DistanceBetweenPlatformsCoef => _distanceBetweenPlatforms / 2f;
 
 
