@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class BallJumper : MonoBehaviour
+public class BallJumpBehaviour : MonoBehaviour
 {
     [SerializeField] private float _jumpForce;
     private bool _jumped;

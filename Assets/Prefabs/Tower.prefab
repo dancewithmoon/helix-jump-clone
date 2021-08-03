@@ -57,6 +57,7 @@ MonoBehaviour:
   _platforms:
   - {fileID: 1944491116100227591, guid: a051c9339ed7f3e4191df33039b97c9a, type: 3}
   - {fileID: -4128453047219300281, guid: 296165e50cbcf6c4b91c8b32158c5131, type: 3}
+  - {fileID: -4128453047219300281, guid: e9f8b3610270f8e42be28c6c2b7dac47, type: 3}
 --- !u!114 &9008179090356048919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,7 +71,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotateSpeed: 5
-  _input: {fileID: 0}
 --- !u!54 &9008179090356048916
 Rigidbody:
   m_ObjectHideFlags: 0
