@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TowerBuilder : MonoBehaviour
@@ -16,21 +17,16 @@ public class TowerBuilder : MonoBehaviour
 
     private readonly float _startAndFinishAdditionalScale = 0.5f;
 
+    public Tower BuildedTower { get; private set; }
     private float BeamScaleY => _levelCount * DistanceBetweenPlatformsCoef + _startAndFinishAdditionalScale*2 + _additionalScale;
     private float DistanceBetweenPlatformsCoef => _distanceBetweenPlatforms / 2f;
 
-
-    private void Awake()
-    {
-        Build();
-    }
-
-    private void Build()
+    public IEnumerator Build()
     {
         Beam beam = Instantiate(_beamPrefab, transform);
         beam.transform.localScale = new Vector3(beam.transform.localScale.x, BeamScaleY, beam.transform.localScale.z);
 
-        StartCoroutine(SpawnPlatforms(beam));
+        yield return StartCoroutine(SpawnPlatforms(beam));
     }
 
     private IEnumerator SpawnPlatforms(Beam beam)
@@ -38,42 +34,45 @@ public class TowerBuilder : MonoBehaviour
         Vector3 spawnPosition = beam.transform.position;
         spawnPosition.y += beam.transform.localScale.y - _additionalScale * 2;
 
-        void SpawnPlatformWithDefaultParams(Platform platform, bool randomizeRotation)
-        {
-            var rotation = randomizeRotation ? Quaternion.Euler(0, Random.Range(0, 360), 0) : Quaternion.identity;
-            var spawnParams = new SpawnParameters(spawnPosition, rotation, transform);
-            SpawnPlatform(platform, spawnParams);
-            spawnPosition.y -= _distanceBetweenPlatforms;
-        }
+        var startPlatform = SpawnPlatform(_startPlatform, spawnPosition, RotationType.Default) as StartPlatform;   
+        spawnPosition.y -= _distanceBetweenPlatforms;
 
-        SpawnPlatformWithDefaultParams(_startPlatform, false);
         yield return null;
 
+        var platforms = new List<Platform>();
         for (int i = 0; i < _levelCount; i++)
         {
-            SpawnPlatformWithDefaultParams(_platforms[Random.Range(0, _platforms.Length)], true);
+            Platform current = SpawnPlatform(_platforms[Random.Range(0, _platforms.Length)], spawnPosition, RotationType.Randomize);
+            spawnPosition.y -= _distanceBetweenPlatforms;
+            platforms.Add(current);
             yield return null;
         }
 
-        SpawnPlatformWithDefaultParams(_finishPlatform, false);
+        var finishPlatform = SpawnPlatform(_finishPlatform, spawnPosition, RotationType.Default) as FinishPlatform;
+
+        BuildedTower = new Tower(startPlatform, platforms, finishPlatform, beam);
     }
 
-    private void SpawnPlatform(Platform platform, SpawnParameters spawnParameters)
+    private Platform SpawnPlatform(Platform prefab, Vector3 spawnPosition, RotationType rotationType)
     {
-        Instantiate(platform, spawnParameters.position, spawnParameters.rotation, spawnParameters.parent);
-    }
-
-    private struct SpawnParameters
-    {
-        public Vector3 position;
-        public Quaternion rotation;
-        public Transform parent;
-
-        public SpawnParameters(Vector3 position, Quaternion rotation, Transform parent)
+        Quaternion rotation;
+        switch (rotationType)
         {
-            this.position = position;
-            this.rotation = rotation;
-            this.parent = parent;
+            case RotationType.Randomize:
+                rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+                break;
+            case RotationType.Default:
+            default:
+                rotation = Quaternion.identity;
+                break;
         }
+        return Instantiate(prefab, spawnPosition, rotation, transform);
+    }
+
+
+    private enum RotationType
+    {
+        Default,
+        Randomize
     }
 }

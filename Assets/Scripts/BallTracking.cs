@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Camera))]
 public class BallTracking : MonoBehaviour
 {
     [SerializeField] private Vector3 _directionOffset;
@@ -14,19 +15,16 @@ public class BallTracking : MonoBehaviour
 
     private bool IsBallReachedMinimalPosition => _ball.transform.position.y < _minimalBallPosition.y;
 
-    private void Start()
+    public void Init(Ball ball, Beam beam)
     {
-        _ball = FindObjectOfType<Ball>();
+        _ball = ball;
         _cameraPosition = _ball.transform.position;
         _minimalBallPosition = _ball.transform.position;
-
-        Beam beam = FindObjectOfType<Beam>();
         _centeredPosition = beam.transform.position;
 
         TrackBall();
         StartCoroutine(WaitForBallTracking());
     }
-
 
     private IEnumerator WaitForBallTracking()
     {
