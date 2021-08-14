@@ -43,14 +43,20 @@ public class Level : MonoBehaviour
 
     private void Lose()
     {
+        PauseLevel();
         Lost?.Invoke();
-        _spawnedBall.GetComponent<Rigidbody>().isKinematic = true;
-        _buildedTower.Beam.GetComponentInParent<Rigidbody>().isKinematic = true;
     }
 
     private void Pass()
     {
+        PauseLevel();
         Passed?.Invoke();
+    }
+
+    private void PauseLevel()
+    {
+        _spawnedBall.GetComponent<Rigidbody>().isKinematic = true;
+        _buildedTower.Beam.GetComponentInParent<Rigidbody>().isKinematic = true;
     }
 
     private void OnDestroy()

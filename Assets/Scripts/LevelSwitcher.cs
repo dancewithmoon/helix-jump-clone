@@ -2,7 +2,6 @@
 
 public class LevelSwitcher : MonoBehaviour, IControllable
 {
-    [SerializeField] private UIScreenSwitcher _screenSwitcher;
     [SerializeField] private Level[] _levels;
     private Level _currentLevel;
     private int _currentLevelId = 0;
@@ -14,19 +13,25 @@ public class LevelSwitcher : MonoBehaviour, IControllable
 
     public void StartNextLevel()
     {
+        UIScreenEvents.HideScreen(UIScreenName.WinScreen);
         _currentLevelId++;
         StartLevel(_currentLevelId);
     }
 
     public void RestartCurrentLevel()
     {
-        _screenSwitcher.HideScreen(UIScreenName.LoseScreen);
+        UIScreenEvents.HideScreen(UIScreenName.LoseScreen);
         StartLevel(_currentLevelId);
     }
 
     private void LevelLost()
     {
-        _screenSwitcher.ShowScreen(UIScreenName.LoseScreen, this);
+        UIScreenEvents.ShowScreen(UIScreenName.LoseScreen, this);
+    }
+
+    private void LevelPassed()
+    {
+        UIScreenEvents.ShowScreen(UIScreenName.WinScreen, this);
     }
 
     private void StartLevel(int levelId)
@@ -40,9 +45,4 @@ public class LevelSwitcher : MonoBehaviour, IControllable
         _currentLevel.Passed += LevelPassed;
         _currentLevel.Lost += LevelLost;
     }
-
-    private void LevelPassed()
-    {
-    }
-
 }

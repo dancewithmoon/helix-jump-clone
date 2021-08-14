@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiLoseScreen: {fileID: 7796546621222330616, guid: 51df838d787feda408466c34fef33416,
     type: 3}
+  _uiWinScreen: {fileID: 1618774552076611429, guid: 25e395bbc36da7142a41689132c58eb2,
+    type: 3}

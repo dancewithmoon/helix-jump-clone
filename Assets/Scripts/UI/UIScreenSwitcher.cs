@@ -3,19 +3,26 @@ using UnityEngine;
 
 public enum UIScreenName
 {
-    LoseScreen
+    LoseScreen,
+    WinScreen
 }
 
 public class UIScreenSwitcher : MonoBehaviour
 {
     [SerializeField] private UIScreensContainer _screensContainer;
-
     private readonly Dictionary<UIScreenName, UIView> _uiScreens = new Dictionary<UIScreenName, UIView>();
     private readonly Dictionary<UIScreenName, UIView> _loaded = new Dictionary<UIScreenName, UIView>();
 
     private void Awake()
     {
         _uiScreens.Add(UIScreenName.LoseScreen, _screensContainer.UILoseScreen);
+        _uiScreens.Add(UIScreenName.WinScreen, _screensContainer.UIWinScreen);
+    }
+
+    private void OnEnable()
+    {
+        UIScreenEvents.ShowScreenEvent += ShowScreen;
+        UIScreenEvents.HideScreenEvent += HideScreen;
     }
 
     public void ShowScreen(UIScreenName screenName, IControllable controllable)
@@ -33,5 +40,11 @@ public class UIScreenSwitcher : MonoBehaviour
             Destroy(view.gameObject);
             _loaded.Remove(screenName);
         }
+    }
+
+    private void OnDisable()
+    {
+        UIScreenEvents.ShowScreenEvent -= ShowScreen;
+        UIScreenEvents.HideScreenEvent -= HideScreen;
     }
 }
