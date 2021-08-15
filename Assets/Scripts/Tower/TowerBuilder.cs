@@ -8,6 +8,7 @@ public class TowerBuilder : MonoBehaviour
     [SerializeField] private int _levelCount;
     [SerializeField] private float _additionalScale;
     [SerializeField] private float _distanceBetweenPlatforms;
+    [SerializeField] private int _maxPlatformRotation;
 
     [Header("Prefabs")]
     [SerializeField] private Beam _beamPrefab;
@@ -59,7 +60,7 @@ public class TowerBuilder : MonoBehaviour
         switch (rotationType)
         {
             case RotationType.Randomize:
-                rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+                rotation = Quaternion.Euler(0, Random.Range(0, _maxPlatformRotation), 0);
                 break;
             case RotationType.Default:
             default:

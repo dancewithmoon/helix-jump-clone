@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 7877675228610671989}
   - component: {fileID: 6999481944791617725}
   - component: {fileID: -3687812043801101698}
+  - component: {fileID: -6780299343245783276}
+  - component: {fileID: -969474655246538676}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -150,3 +152,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9797d241e2740df478e8d5f5f26a2a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-6780299343245783276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6999481944791617712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaa1a570f0a2805468a1fc3e171d0274, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-969474655246538676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6999481944791617712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e31b85bb92868449f9dbe7ecdb5db7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _needPassToBreakPlatform: 2

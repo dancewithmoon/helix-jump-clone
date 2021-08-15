@@ -6,7 +6,8 @@ public class PassedPlatformSegment : PlatformSegment
     {
         if (other.TryGetComponent(out Ball ball))
         {
-            GetComponentInParent<Platform>().Break();
+            GetComponentInParent<Platform>().Pass();
+            ball.GetComponent<BallPassedPlatformsCounter>().PassPlatform();
         }
     }
 }

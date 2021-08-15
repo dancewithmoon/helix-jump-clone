@@ -1,24 +1,20 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
-    [SerializeField] private float _bounceForce;
-    [SerializeField] private float _bounceRadius;
-
-    public void Break()
-    {
-        PlatformSegment[] segments = GetComponentsInChildren<PlatformSegment>();
-        foreach(PlatformSegment segment in segments)
-        {
-            segment.Bounce(_bounceForce, transform.position, _bounceRadius);
-        }
-        StartCoroutine(DestroyPlatform());
-    }
+    public event Action Passed;
 
     private IEnumerator DestroyPlatform()
     {
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
+    }
+
+    public void Pass()
+    {
+        Passed?.Invoke();
+        StartCoroutine(DestroyPlatform());
     }
 }

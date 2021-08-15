@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9008179090356048919}
   - component: {fileID: 9008179090356048916}
   m_Layer: 0
-  m_Name: Tower
+  m_Name: Tower1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,6 +48,7 @@ MonoBehaviour:
   _levelCount: 10
   _additionalScale: 3
   _distanceBetweenPlatforms: 2
+  _maxPlatformRotation: 0
   _beamPrefab: {fileID: 153021157818875840, guid: d5a5c03a6d7069044afd4b1ad42f79ab,
     type: 3}
   _startPlatform: {fileID: 3477164675963103174, guid: 8fd40d756df6c2644a64b59170f2acc9,
@@ -70,7 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338511929a29cd0428897be14f5eb97a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotateSpeed: 5
+  _rotateSpeed: 1
 --- !u!54 &9008179090356048916
 Rigidbody:
   m_ObjectHideFlags: 0

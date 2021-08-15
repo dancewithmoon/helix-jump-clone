@@ -3,7 +3,7 @@
 [RequireComponent(typeof(Rigidbody))]
 public class TowerRotator : MonoBehaviour
 {
-    [SerializeField] private float _rotateSpeed;
+    [SerializeField] private float _rotateSpeed = 1;
 
     private Rigidbody _self;
     private SwipeInput _input;
@@ -21,7 +21,7 @@ public class TowerRotator : MonoBehaviour
 
     private void Rotate(float torque)
     {
-        _self.AddTorque(Vector3.up * -torque);
+        _self.AddTorque(Vector3.up * -torque * _rotateSpeed);
     }
 
     private void OnDisable()

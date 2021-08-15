@@ -27,9 +27,16 @@ public class UIScreenSwitcher : MonoBehaviour
 
     public void ShowScreen(UIScreenName screenName, IControllable controllable)
     {
-        UIView view = Instantiate(_uiScreens[screenName]);
-        view.Load(controllable);
-        _loaded.Add(screenName, view);
+        if (_loaded.ContainsKey(screenName))
+        {
+            _loaded[screenName].gameObject.SetActive(true);
+        }
+        else
+        {
+            UIView view = Instantiate(_uiScreens[screenName]);
+            view.Load(controllable);
+            _loaded.Add(screenName, view);
+        }
     }
 
     public void HideScreen(UIScreenName screenName)
