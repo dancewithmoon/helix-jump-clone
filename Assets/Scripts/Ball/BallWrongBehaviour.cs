@@ -6,6 +6,9 @@ public class BallWrongBehaviour : MonoBehaviour
     public event Action Lose;
     public void TouchWrong()
     {
-        Lose?.Invoke();
+        if (enabled)
+        {
+            Lose?.Invoke();
+        }
     }
 }

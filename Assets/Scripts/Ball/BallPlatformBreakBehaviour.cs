@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 [RequireComponent(typeof(BallPassedPlatformsCounter), typeof(BallWrongBehaviour))]
 public class BallPlatformBreakBehaviour : MonoBehaviour
@@ -30,7 +31,7 @@ public class BallPlatformBreakBehaviour : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private IEnumerator OnCollisionEnter(Collision collision)
     {
         BreakablePlatform platform = collision.gameObject.GetComponentInParent<BreakablePlatform>();
         if (platform != null)
@@ -39,8 +40,9 @@ public class BallPlatformBreakBehaviour : MonoBehaviour
             {
                 platform.Break();
             }
-            _ballWrongBehaviour.enabled = true;
             _passedPlatformsFromLastTouch = 0;
+            yield return new WaitForSeconds(0.2f);
+            _ballWrongBehaviour.enabled = true;
         }
     }
 
