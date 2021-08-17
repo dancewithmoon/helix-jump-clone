@@ -10,12 +10,22 @@ public class WrongSegment : PlatformSegment
         _self = GetComponent<Collider>();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnEnable()
     {
-        if (collision.gameObject.TryGetComponent(out BallWrongBehaviour wrong))
+        BallTouched += Touch;
+    }
+
+    private void Touch(Ball ball)
+    {
+        if (ball.TryGetComponent(out BallWrongBehaviour wrong))
         {
             wrong.TouchWrong();
             _self.enabled = false;
         }
+    }
+
+    private void OnDisable()
+    {
+        BallTouched -= Touch;
     }
 }

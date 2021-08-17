@@ -1,12 +1,20 @@
-﻿using UnityEngine;
-
-public class JumperSegment : PlatformSegment
+﻿public class JumperSegment : PlatformSegment
 {
-    private void OnCollisionEnter(Collision collision)
+    private void OnEnable()
     {
-        if (collision.gameObject.TryGetComponent(out BallJumpBehaviour jumper))
+        BallTouched += CallBallJump;
+    }
+
+    private void CallBallJump(Ball ball)
+    {
+        if (ball.TryGetComponent(out BallJumpBehaviour jumper))
         {
             jumper.Jump();
         }
+    }
+
+    private void OnDisable()
+    {
+        BallTouched -= CallBallJump;
     }
 }
