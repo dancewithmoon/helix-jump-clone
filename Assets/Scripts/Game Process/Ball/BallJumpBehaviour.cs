@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -7,6 +8,8 @@ public class BallJumpBehaviour : MonoBehaviour
     [SerializeField] private float _jumpForce;
     private bool _jumped;
     private Rigidbody _rigidbody;
+
+    public Action Jumped;
 
     private void Awake()
     {
@@ -31,5 +34,6 @@ public class BallJumpBehaviour : MonoBehaviour
 
         _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
         _jumped = false;
+        Jumped?.Invoke();
     }
 }
