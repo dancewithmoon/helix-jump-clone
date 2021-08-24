@@ -71,7 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338511929a29cd0428897be14f5eb97a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotateSpeed: 1
+  _rotateSpeed: 20
 --- !u!54 &9008179090356048916
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -82,7 +82,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 1
+  m_AngularDrag: 15
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
