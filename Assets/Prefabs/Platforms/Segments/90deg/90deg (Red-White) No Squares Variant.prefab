@@ -66,18 +66,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: -5634944049139579078, guid: 4ce3273ac5ca27144b79828a1e96784a,
-        type: 3}
+      objectReference: {fileID: 2100000, guid: b6981fff8aed7e3478d2b2f54d829bc1, type: 2}
     - target: {fileID: 2211858060569019975, guid: d031b3702ebd8154387877aa2f1f6c3c,
         type: 3}
       propertyPath: m_Materials.Array.data[3]
       value: 
-      objectReference: {fileID: -5634944049139579078, guid: 4ce3273ac5ca27144b79828a1e96784a,
-        type: 3}
+      objectReference: {fileID: 2100000, guid: b6981fff8aed7e3478d2b2f54d829bc1, type: 2}
     - target: {fileID: 3075748801262754540, guid: d031b3702ebd8154387877aa2f1f6c3c,
         type: 3}
       propertyPath: m_Name
-      value: 90deg (Red-White) No Squares
+      value: 90deg (Red-White) No Squares Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d031b3702ebd8154387877aa2f1f6c3c, type: 3}

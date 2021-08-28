@@ -10,6 +10,6 @@ public class SwipeInput : MonoBehaviour, IDragHandler
 
     public void OnDrag(PointerEventData eventData)
     {
-        Swiped?.Invoke(eventData.delta.x * Time.deltaTime * swipeSpeed);
+        Swiped?.Invoke(eventData.delta.x * Time.fixedDeltaTime * swipeSpeed);
     }
 }

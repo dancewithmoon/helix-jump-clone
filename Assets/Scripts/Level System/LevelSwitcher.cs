@@ -15,6 +15,10 @@ public class LevelSwitcher : MonoBehaviour, IControllable
     {
         UIScreenEvents.HideScreen(UIScreenName.WinScreen);
         _currentLevelId++;
+        if(_currentLevelId == _levels.Length)
+        {
+            _currentLevelId = 0;
+        }
         StartLevel(_currentLevelId);
     }
 

@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c6989c986051e40a576b001b0c2222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swipeSpeed: 90
+  swipeSpeed: 25
 --- !u!114 &290580977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,7 +533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levels:
   - {fileID: 4693343893292702808, guid: 57716fe75ace0b34db74aa7ac607d3ff, type: 3}
-  - {fileID: 4693343893292702808, guid: 57716fe75ace0b34db74aa7ac607d3ff, type: 3}
+  - {fileID: 4693343893292702808, guid: 62703c5eb73720d4cb6faaf7573c9725, type: 3}
 --- !u!4 &1539528879
 Transform:
   m_ObjectHideFlags: 0

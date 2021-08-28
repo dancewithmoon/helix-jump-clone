@@ -64,13 +64,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5936887056794288495, guid: 31609aa268b492e41adb6ecf32804dad,
         type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: b6981fff8aed7e3478d2b2f54d829bc1, type: 2}
+    - target: {fileID: 5936887056794288495, guid: 31609aa268b492e41adb6ecf32804dad,
+        type: 3}
       propertyPath: m_Materials.Array.data[3]
       value: 
       objectReference: {fileID: 2100000, guid: 60144c8db8f8e3a4ab95160e75677f9d, type: 2}
     - target: {fileID: 7384028997774089668, guid: 31609aa268b492e41adb6ecf32804dad,
         type: 3}
       propertyPath: m_Name
-      value: 90deg (Red-White) Right Square
+      value: 90deg (Red-White) Right Square Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31609aa268b492e41adb6ecf32804dad, type: 3}
