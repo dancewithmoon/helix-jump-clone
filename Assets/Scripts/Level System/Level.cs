@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Level : MonoBehaviour
 {
+    [SerializeField] private TowerSettings _towerSettings;
+
     [Header("Prefabs")]
     [SerializeField] private TowerBuilder _towerPrefab;
     [SerializeField] private Ball _ballPrefab;
@@ -23,7 +25,7 @@ public class Level : MonoBehaviour
     private IEnumerator GenerateLevel()
     {
         TowerBuilder builder = Instantiate(_towerPrefab, transform);
-        yield return StartCoroutine(builder.Build());
+        yield return StartCoroutine(builder.Build(_towerSettings));
 
         _buildedTower = builder.BuildedTower;
         _spawnedBall = Instantiate(_ballPrefab, _buildedTower.StartPlatform.SpawnPoint, Quaternion.identity, transform);

@@ -43,7 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bae20a6adba75e649bc3cf6aeb35c462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _towerPrefab: {fileID: 9008179090356048917, guid: d20f1f8046c6f9f49aef6f95187b6f17,
+  _towerSettings: {fileID: 11400000, guid: 5ede9de8f40c3b846a046b01f425cf2d, type: 2}
+  _towerPrefab: {fileID: 9008179090356048917, guid: 2714c20346a03e149ae7a2bfdb15b954,
     type: 3}
   _ballPrefab: {fileID: 7877675228610671989, guid: 5824cdae1406d3c418946b73dc71fb4d,
     type: 3}

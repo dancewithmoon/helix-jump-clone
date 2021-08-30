@@ -4,27 +4,20 @@ using UnityEngine;
 
 public class TowerBuilder : MonoBehaviour
 {
-    [Header("Settings")]
-    [SerializeField] private int _levelCount;
-    [SerializeField] private float _additionalScale;
-    [SerializeField] private float _distanceBetweenPlatforms;
-    [SerializeField] private int _maxPlatformRotation;
+    private const float ADDITIONAL_SCALE = 3;
+    private const float DISTANCE_BETWEEN_PLATFORMS = 2;
 
-    [Header("Prefabs")]
-    [SerializeField] private Beam _beamPrefab;
-    [SerializeField] private StartPlatform _startPlatform;
-    [SerializeField] private FinishPlatform _finishPlatform;
-    [SerializeField] private Platform[] _platforms;
-
+    private TowerSettings _settings;
     private readonly float _startAndFinishAdditionalScale = 0.5f;
 
     public Tower BuildedTower { get; private set; }
-    private float BeamScaleY => _levelCount * DistanceBetweenPlatformsCoef + _startAndFinishAdditionalScale*2 + _additionalScale;
-    private float DistanceBetweenPlatformsCoef => _distanceBetweenPlatforms / 2f;
+    private float BeamScaleY => _settings.LevelCount * DistanceBetweenPlatformsCoef + _startAndFinishAdditionalScale*2 + ADDITIONAL_SCALE;
+    private float DistanceBetweenPlatformsCoef => DISTANCE_BETWEEN_PLATFORMS / 2f;
 
-    public IEnumerator Build()
+    public IEnumerator Build(TowerSettings settings)
     {
-        Beam beam = Instantiate(_beamPrefab, transform);
+        _settings = settings;
+        Beam beam = Instantiate(_settings.Beam, transform);
         beam.transform.localScale = new Vector3(beam.transform.localScale.x, BeamScaleY, beam.transform.localScale.z);
 
         yield return StartCoroutine(SpawnPlatforms(beam));
@@ -33,23 +26,23 @@ public class TowerBuilder : MonoBehaviour
     private IEnumerator SpawnPlatforms(Beam beam)
     {
         Vector3 spawnPosition = beam.transform.position;
-        spawnPosition.y += beam.transform.localScale.y - _additionalScale * 2;
+        spawnPosition.y += beam.transform.localScale.y - ADDITIONAL_SCALE * 2;
 
-        var startPlatform = SpawnPlatform(_startPlatform, spawnPosition, RotationType.Default) as StartPlatform;   
-        spawnPosition.y -= _distanceBetweenPlatforms;
+        var startPlatform = SpawnPlatform(_settings.StartPlatform, spawnPosition, RotationType.Default) as StartPlatform;   
+        spawnPosition.y -= DISTANCE_BETWEEN_PLATFORMS;
 
         yield return null;
 
         var platforms = new List<Platform>();
-        for (int i = 0; i < _levelCount; i++)
+        for (int i = 0; i < _settings.LevelCount; i++)
         {
-            Platform current = SpawnPlatform(_platforms[Random.Range(0, _platforms.Length)], spawnPosition, RotationType.Randomize);
-            spawnPosition.y -= _distanceBetweenPlatforms;
+            Platform current = SpawnPlatform(_settings.Platforms[Random.Range(0, _settings.Platforms.Count)], spawnPosition, RotationType.Randomize);
+            spawnPosition.y -= DISTANCE_BETWEEN_PLATFORMS;
             platforms.Add(current);
             yield return null;
         }
 
-        var finishPlatform = SpawnPlatform(_finishPlatform, spawnPosition, RotationType.Default) as FinishPlatform;
+        var finishPlatform = SpawnPlatform(_settings.FinishPlatform, spawnPosition, RotationType.Default) as FinishPlatform;
 
         BuildedTower = new Tower(startPlatform, platforms, finishPlatform, beam);
     }
@@ -60,7 +53,7 @@ public class TowerBuilder : MonoBehaviour
         switch (rotationType)
         {
             case RotationType.Randomize:
-                rotation = Quaternion.Euler(0, Random.Range(0, _maxPlatformRotation), 0);
+                rotation = Quaternion.Euler(0, Random.Range(0, _settings.MaxPlatformRotation), 0);
                 break;
             case RotationType.Default:
             default:
