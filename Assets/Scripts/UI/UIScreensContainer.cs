@@ -8,4 +8,7 @@ public class UIScreensContainer : ScriptableObject
 
     [SerializeField] private UIWinScreenView _uiWinScreen;
     public UIWinScreenView UIWinScreen => _uiWinScreen;
+
+    [SerializeField] private UIProgressView _uiProgressView;
+    public UIProgressView UIProgressView => _uiProgressView;
 }

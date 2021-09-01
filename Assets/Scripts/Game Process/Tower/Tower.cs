@@ -7,6 +7,8 @@ public class Tower
     public FinishPlatform FinishPlatform { get; private set; }
     public Beam Beam { get; private set; }
 
+    public int PlatformsCount => Platforms.Count + 2;
+
     public Tower(StartPlatform startPlatform, List<Platform> platforms, FinishPlatform finishPlatform, Beam beam)
     {
         StartPlatform = startPlatform;

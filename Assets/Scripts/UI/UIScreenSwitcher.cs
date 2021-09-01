@@ -4,7 +4,8 @@ using UnityEngine;
 public enum UIScreenName
 {
     LoseScreen,
-    WinScreen
+    WinScreen,
+    ProgressHUD
 }
 
 public class UIScreenSwitcher : MonoBehaviour
@@ -17,6 +18,7 @@ public class UIScreenSwitcher : MonoBehaviour
     {
         _uiScreens.Add(UIScreenName.LoseScreen, _screensContainer.UILoseScreen);
         _uiScreens.Add(UIScreenName.WinScreen, _screensContainer.UIWinScreen);
+        _uiScreens.Add(UIScreenName.ProgressHUD, _screensContainer.UIProgressView);
     }
 
     private void OnEnable()

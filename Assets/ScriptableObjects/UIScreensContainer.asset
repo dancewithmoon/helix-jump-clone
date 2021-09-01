@@ -16,3 +16,5 @@ MonoBehaviour:
     type: 3}
   _uiWinScreen: {fileID: 1618774552076611429, guid: 25e395bbc36da7142a41689132c58eb2,
     type: 3}
+  _uiProgressView: {fileID: 4397978662012032293, guid: 39e93410d6f2e4b448460f4b31cb583f,
+    type: 3}

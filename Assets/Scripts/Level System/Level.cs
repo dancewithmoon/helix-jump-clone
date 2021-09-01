@@ -33,7 +33,9 @@ public class Level : MonoBehaviour
 
         BallTracking tracking = Instantiate(_trackingPrefab, transform);
         tracking.Init(_spawnedBall, _buildedTower.Beam);
-        
+
+        UIScreenEvents.ShowScreen(UIScreenName.ProgressHUD, new LevelProgressModel(_buildedTower, _spawnedBall.GetComponent<BallPassedPlatformsCounter>()));
+
         SubscribeOnEvents();
     }
 
@@ -63,6 +65,7 @@ public class Level : MonoBehaviour
 
     private void OnDestroy()
     {
+        UIScreenEvents.HideScreen(UIScreenName.ProgressHUD);
         Passed = null;
         Lost = null;
     }

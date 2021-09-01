@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class PassedPlatformSegment : PlatformSegment
+﻿public class PassedPlatformSegment : PlatformSegment
 {
     private void OnEnable()
     {
@@ -13,6 +11,7 @@ public class PassedPlatformSegment : PlatformSegment
         {
             passedCounter.PassPlatform();
             GetComponentInParent<Platform>().Pass();
+            enabled = false;
         }
     }
 
