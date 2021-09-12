@@ -1,10 +1,17 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class LevelSwitcher : MonoBehaviour, IControllable
 {
     [SerializeField] private Level[] _levels;
     private Level _currentLevel;
     private int _currentLevelId = 0;
+
+    public event Action NextLevelStarted;
+    public event Action CurrentLevelRestarted;
+    public event Action LevelLost;
+    public event Action LevelPassed;
+    public event Action<LevelProgressModel> LevelGenerated;
 
     private void Awake()
     {
@@ -13,7 +20,7 @@ public class LevelSwitcher : MonoBehaviour, IControllable
 
     public void StartNextLevel()
     {
-        UIScreenEvents.HideScreen(UIScreenName.WinScreen);
+        NextLevelStarted?.Invoke();
         _currentLevelId++;
         if(_currentLevelId == _levels.Length)
         {
@@ -24,18 +31,8 @@ public class LevelSwitcher : MonoBehaviour, IControllable
 
     public void RestartCurrentLevel()
     {
-        UIScreenEvents.HideScreen(UIScreenName.LoseScreen);
+        CurrentLevelRestarted?.Invoke();
         StartLevel(_currentLevelId);
-    }
-
-    private void LevelLost()
-    {
-        UIScreenEvents.ShowScreen(UIScreenName.LoseScreen, this);
-    }
-
-    private void LevelPassed()
-    {
-        UIScreenEvents.ShowScreen(UIScreenName.WinScreen, this);
     }
 
     private void StartLevel(int levelId)
@@ -46,7 +43,17 @@ public class LevelSwitcher : MonoBehaviour, IControllable
         }
 
         _currentLevel = Instantiate(_levels[levelId]);
-        _currentLevel.Passed += LevelPassed;
-        _currentLevel.Lost += LevelLost;
+        _currentLevel.Passed += () => LevelPassed?.Invoke();
+        _currentLevel.Lost += () => LevelLost?.Invoke();
+        _currentLevel.LevelGenerated += (LevelProgressModel progressModel) => LevelGenerated?.Invoke(progressModel);
+    }
+
+    private void OnDestroy()
+    {
+        NextLevelStarted = null;
+        CurrentLevelRestarted = null;
+        LevelLost = null;
+        LevelPassed = null;
+        LevelGenerated = null;
     }
 }

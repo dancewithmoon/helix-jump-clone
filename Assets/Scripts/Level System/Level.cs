@@ -16,6 +16,7 @@ public class Level : MonoBehaviour
 
     public event Action Passed;
     public event Action Lost;
+    public event Action<LevelProgressModel> LevelGenerated;
 
     private void Awake()
     {
@@ -34,7 +35,7 @@ public class Level : MonoBehaviour
         BallTracking tracking = Instantiate(_trackingPrefab, transform);
         tracking.Init(_spawnedBall, _buildedTower.Beam);
 
-        UIScreenEvents.ShowScreen(UIScreenName.ProgressHUD, new LevelProgressModel(_buildedTower, _spawnedBall.GetComponent<BallPassedPlatformsCounter>()));
+        LevelGenerated?.Invoke(new LevelProgressModel(_buildedTower, _spawnedBall.GetComponent<BallPassedPlatformsCounter>()));
 
         SubscribeOnEvents();
     }
@@ -65,8 +66,8 @@ public class Level : MonoBehaviour
 
     private void OnDestroy()
     {
-        UIScreenEvents.HideScreen(UIScreenName.ProgressHUD);
         Passed = null;
         Lost = null;
+        LevelGenerated = null;
     }
 }

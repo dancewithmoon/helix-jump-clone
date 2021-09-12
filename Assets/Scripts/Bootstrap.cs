@@ -10,7 +10,21 @@ public class Bootstrap : MonoBehaviour
     private void Start()
     {
         Instantiate(_swipeInputCanvas);
-        Instantiate(_screenSwitcher);
-        Instantiate(_levelSwitcher);
+        UIScreenSwitcher screenSwitcher = Instantiate(_screenSwitcher);
+
+        LevelSwitcher levelSwitcher = Instantiate(_levelSwitcher);
+        levelSwitcher.NextLevelStarted += () =>
+        {
+            screenSwitcher.HideScreen(UIScreenName.WinScreen);
+            screenSwitcher.HideScreen(UIScreenName.ProgressHUD);
+        };
+        levelSwitcher.CurrentLevelRestarted += () =>
+        {
+            screenSwitcher.HideScreen(UIScreenName.LoseScreen);
+            screenSwitcher.HideScreen(UIScreenName.ProgressHUD);
+        };
+        levelSwitcher.LevelLost += () => screenSwitcher.ShowScreen(UIScreenName.LoseScreen, levelSwitcher);
+        levelSwitcher.LevelPassed += () => screenSwitcher.ShowScreen(UIScreenName.WinScreen, levelSwitcher);
+        levelSwitcher.LevelGenerated += (LevelProgressModel progressModel) => screenSwitcher.ShowScreen(UIScreenName.ProgressHUD, progressModel);
     }
 }

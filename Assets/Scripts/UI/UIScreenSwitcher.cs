@@ -21,12 +21,6 @@ public class UIScreenSwitcher : MonoBehaviour
         _uiScreens.Add(UIScreenName.ProgressHUD, _screensContainer.UIProgressView);
     }
 
-    private void OnEnable()
-    {
-        UIScreenEvents.ShowScreenEvent += ShowScreen;
-        UIScreenEvents.HideScreenEvent += HideScreen;
-    }
-
     public void ShowScreen(UIScreenName screenName, IControllable controllable)
     {
         if (_loaded.ContainsKey(screenName))
@@ -49,11 +43,5 @@ public class UIScreenSwitcher : MonoBehaviour
             Destroy(view.gameObject);
             _loaded.Remove(screenName);
         }
-    }
-
-    private void OnDisable()
-    {
-        UIScreenEvents.ShowScreenEvent -= ShowScreen;
-        UIScreenEvents.HideScreenEvent -= HideScreen;
     }
 }
