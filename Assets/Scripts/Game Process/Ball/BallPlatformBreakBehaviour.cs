@@ -31,18 +31,31 @@ public class BallPlatformBreakBehaviour : MonoBehaviour
         }
     }
 
-    private IEnumerator OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         BreakablePlatform platform = collision.gameObject.GetComponentInParent<BreakablePlatform>();
-        if (platform != null)
+
+        if (platform == null)
         {
-            if(CanBreakPlatform)
-            {
-                platform.Break();
-            }
-            _passedPlatformsFromLastTouch = 0;
-            yield return new WaitForSeconds(0.2f);
-            _ballWrongBehaviour.enabled = true;
+            return;
+        }
+
+        StartCoroutine(RegisterPlatformTouch(platform));
+    }
+
+    private IEnumerator RegisterPlatformTouch(BreakablePlatform platform)
+    {
+        TryBreakPlatform(platform);
+        _passedPlatformsFromLastTouch = 0;
+        yield return new WaitForSeconds(0.2f);
+        _ballWrongBehaviour.enabled = true;
+    }
+
+    private void TryBreakPlatform(BreakablePlatform platform)
+    {
+        if (CanBreakPlatform)
+        {
+            platform.Break();
         }
     }
 

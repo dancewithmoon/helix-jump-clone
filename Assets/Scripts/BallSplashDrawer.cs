@@ -9,10 +9,20 @@ public class BallSplashDrawer : MonoBehaviour
     {
         if(collision.gameObject.TryGetComponent(out PlatformSegment platformSegment))
         {
-            Vector3 contactPoint = collision.GetContact(0).point;
-            contactPoint.y = transform.position.y - _yOffset;
-            GameObject splash = Instantiate(_splashPrefab.gameObject, platformSegment.transform);          
-            splash.transform.position = contactPoint;
+            InstantiateSplash(platformSegment, GetFirstContactPoint(collision));
         }
+    }
+
+    private void InstantiateSplash(PlatformSegment platformSegment, Vector3 position)
+    {
+        GameObject splash = Instantiate(_splashPrefab.gameObject, platformSegment.transform);
+        splash.transform.position = position;
+    }
+
+    private Vector3 GetFirstContactPoint(Collision collision)
+    {
+        Vector3 contactPoint = collision.GetContact(0).point;
+        contactPoint.y = transform.position.y - _yOffset;
+        return contactPoint;
     }
 }

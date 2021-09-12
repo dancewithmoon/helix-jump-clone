@@ -27,21 +27,20 @@ public class TowerBuilder : MonoBehaviour
     {
         Vector3 spawnPosition = beam.transform.position;
         spawnPosition.y += beam.transform.localScale.y - ADDITIONAL_SCALE * 2;
-
         var startPlatform = SpawnPlatform(_settings.StartPlatform, spawnPosition, RotationType.Default) as StartPlatform;   
-        spawnPosition.y -= DISTANCE_BETWEEN_PLATFORMS;
 
         yield return null;
 
         var platforms = new List<Platform>();
         for (int i = 0; i < _settings.LevelCount; i++)
         {
-            Platform current = SpawnPlatform(_settings.Platforms[Random.Range(0, _settings.Platforms.Count)], spawnPosition, RotationType.Randomize);
             spawnPosition.y -= DISTANCE_BETWEEN_PLATFORMS;
+            Platform current = SpawnPlatform(_settings.Platforms[Random.Range(0, _settings.Platforms.Count)], spawnPosition, RotationType.Randomize);
             platforms.Add(current);
             yield return null;
         }
 
+        spawnPosition.y -= DISTANCE_BETWEEN_PLATFORMS;
         var finishPlatform = SpawnPlatform(_settings.FinishPlatform, spawnPosition, RotationType.Default) as FinishPlatform;
 
         BuildedTower = new Tower(startPlatform, platforms, finishPlatform, beam);
