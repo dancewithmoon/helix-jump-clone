@@ -6,6 +6,7 @@ public class LevelSwitcher : MonoBehaviour, IControllable
     [SerializeField] private Level[] _levels;
     private Level _currentLevel;
     private int _currentLevelId = 0;
+    private bool IsLastLevel => _currentLevelId == _levels.Length;
 
     public event Action NextLevelStarted;
     public event Action CurrentLevelRestarted;
@@ -22,12 +23,13 @@ public class LevelSwitcher : MonoBehaviour, IControllable
     {
         NextLevelStarted?.Invoke();
         _currentLevelId++;
-        if(_currentLevelId == _levels.Length)
+        if (IsLastLevel)
         {
             _currentLevelId = 0;
         }
         StartLevel(_currentLevelId);
     }
+
 
     public void RestartCurrentLevel()
     {

@@ -11,6 +11,7 @@ public enum UIScreenName
 public class UIScreenSwitcher : MonoBehaviour
 {
     [SerializeField] private UIScreensContainer _screensContainer;
+
     private readonly Dictionary<UIScreenName, UIView> _uiScreens = new Dictionary<UIScreenName, UIView>();
     private readonly Dictionary<UIScreenName, UIView> _loaded = new Dictionary<UIScreenName, UIView>();
 
@@ -23,16 +24,27 @@ public class UIScreenSwitcher : MonoBehaviour
 
     public void ShowScreen(UIScreenName screenName, IControllable controllable)
     {
-        if (_loaded.ContainsKey(screenName))
-        {
-            _loaded[screenName].gameObject.SetActive(true);
-        }
+        if (IsScreenInstanceExists(screenName))
+            ShowExistingScreenInstance(screenName);
         else
-        {
-            UIView view = Instantiate(_uiScreens[screenName]);
-            view.Load(controllable);
-            _loaded.Add(screenName, view);
-        }
+            CreateNewScreenInstance(screenName, controllable);
+    }
+
+    private bool IsScreenInstanceExists(UIScreenName screenName)
+    {
+        return _loaded.ContainsKey(screenName);
+    }
+
+    private void ShowExistingScreenInstance(UIScreenName screenName)
+    {
+        _loaded[screenName].gameObject.SetActive(true);
+    }
+
+    private void CreateNewScreenInstance(UIScreenName screenName, IControllable controllable)
+    {
+        UIView view = Instantiate(_uiScreens[screenName]);
+        view.Load(controllable);
+        _loaded.Add(screenName, view);
     }
 
     public void HideScreen(UIScreenName screenName)

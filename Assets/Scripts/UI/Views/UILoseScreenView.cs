@@ -15,7 +15,7 @@ public class UILoseScreenView : UIView
 
     private void OnEnable()
     {
-        if (_levelSwitcher)
+        if (_levelSwitcher != null)
         {
             _restart.onClick.AddListener(_levelSwitcher.RestartCurrentLevel);
         }
