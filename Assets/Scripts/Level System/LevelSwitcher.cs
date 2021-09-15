@@ -8,22 +8,17 @@ public class LevelSwitcher : MonoBehaviour, IControllable
     private int _currentLevelId = 0;
     private bool IsLastLevel => _currentLevelId == _levels.Length;
 
-    public event Action NextLevelStarted;
-    public event Action CurrentLevelRestarted;
-    public event Action LevelLost;
-    public event Action LevelPassed;
-    public event Action<LevelProgressModel> LevelGenerated;
+    public event Action<Level> LevelStarted;
 
-    private void Awake()
+    private void Start()
     {
         StartLevel(_currentLevelId);
     }
 
     public void StartNextLevel()
     {
-        NextLevelStarted?.Invoke();
         _currentLevelId++;
-        if (IsLastLevel)
+        if (IsLastLevel == true)
         {
             _currentLevelId = 0;
         }
@@ -33,29 +28,23 @@ public class LevelSwitcher : MonoBehaviour, IControllable
 
     public void RestartCurrentLevel()
     {
-        CurrentLevelRestarted?.Invoke();
         StartLevel(_currentLevelId);
     }
 
     private void StartLevel(int levelId)
     {
-        if (_currentLevel)
+        if (_currentLevel != null)
         {
             Destroy(_currentLevel.gameObject);
         }
 
         _currentLevel = Instantiate(_levels[levelId]);
-        _currentLevel.Passed += () => LevelPassed?.Invoke();
-        _currentLevel.Lost += () => LevelLost?.Invoke();
-        _currentLevel.LevelGenerated += (LevelProgressModel progressModel) => LevelGenerated?.Invoke(progressModel);
+        LevelStarted?.Invoke(_currentLevel);
+        _currentLevel.Generate();
     }
 
     private void OnDestroy()
     {
-        NextLevelStarted = null;
-        CurrentLevelRestarted = null;
-        LevelLost = null;
-        LevelPassed = null;
-        LevelGenerated = null;
+        LevelStarted = null;
     }
 }

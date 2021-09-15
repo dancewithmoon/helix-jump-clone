@@ -13,18 +13,12 @@ public class Bootstrap : MonoBehaviour
         UIScreenSwitcher screenSwitcher = Instantiate(_screenSwitcher);
 
         LevelSwitcher levelSwitcher = Instantiate(_levelSwitcher);
-        levelSwitcher.NextLevelStarted += () =>
+        levelSwitcher.LevelStarted += (Level level) =>
         {
-            screenSwitcher.HideScreen(UIScreenName.WinScreen);
-            screenSwitcher.HideScreen(UIScreenName.ProgressHUD);
+            screenSwitcher.HideAllScreens();
+            level.LevelGenerated += (levelProgress) => screenSwitcher.ShowScreen(UIScreenName.ProgressHUD, levelProgress);
+            level.Lost += () => screenSwitcher.ShowScreen(UIScreenName.LoseScreen, levelSwitcher);
+            level.Passed += () => screenSwitcher.ShowScreen(UIScreenName.WinScreen, levelSwitcher);
         };
-        levelSwitcher.CurrentLevelRestarted += () =>
-        {
-            screenSwitcher.HideScreen(UIScreenName.LoseScreen);
-            screenSwitcher.HideScreen(UIScreenName.ProgressHUD);
-        };
-        levelSwitcher.LevelLost += () => screenSwitcher.ShowScreen(UIScreenName.LoseScreen, levelSwitcher);
-        levelSwitcher.LevelPassed += () => screenSwitcher.ShowScreen(UIScreenName.WinScreen, levelSwitcher);
-        levelSwitcher.LevelGenerated += (LevelProgressModel progressModel) => screenSwitcher.ShowScreen(UIScreenName.ProgressHUD, progressModel);
     }
 }

@@ -25,7 +25,7 @@ public class BallPlatformBreakBehaviour : MonoBehaviour
     private void OnPlatformPassed(int passedCount)
     {
         _passedPlatformsFromLastTouch++;
-        if(CanBreakPlatform)
+        if(CanBreakPlatform == true)
         {
             _ballWrongBehaviour.enabled = false;
         }

@@ -18,7 +18,7 @@ public class Level : MonoBehaviour
     public event Action Lost;
     public event Action<LevelProgressModel> LevelGenerated;
 
-    private void Awake()
+    public void Generate()
     {
         StartCoroutine(GenerateLevel());
     }

@@ -14,7 +14,7 @@ public class UIWinScreenView : UIView
 
     private void OnEnable()
     {
-        if (_levelSwitcher)
+        if (_levelSwitcher != null)
         {
             _nextLevel.onClick.AddListener(_levelSwitcher.StartNextLevel);
         }

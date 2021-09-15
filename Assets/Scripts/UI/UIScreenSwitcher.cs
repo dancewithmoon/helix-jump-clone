@@ -24,10 +24,30 @@ public class UIScreenSwitcher : MonoBehaviour
 
     public void ShowScreen(UIScreenName screenName, IControllable controllable)
     {
-        if (IsScreenInstanceExists(screenName))
+        if (IsScreenInstanceExists(screenName) == true)
             ShowExistingScreenInstance(screenName);
         else
             CreateNewScreenInstance(screenName, controllable);
+    }
+
+    public void HideScreen(UIScreenName screenName)
+    {
+        UIView view = _loaded[screenName];
+        if (view != null)
+        {
+            Destroy(view.gameObject);
+            _loaded.Remove(screenName);
+        }
+    }
+
+    public void HideAllScreens()
+    {
+        List<UIScreenName> screensToHide = new List<UIScreenName>();
+        foreach(UIScreenName screen in _loaded.Keys)
+        {
+            screensToHide.Add(screen);
+        }
+        screensToHide.ForEach((screen) => HideScreen(screen));
     }
 
     private bool IsScreenInstanceExists(UIScreenName screenName)
@@ -45,15 +65,5 @@ public class UIScreenSwitcher : MonoBehaviour
         UIView view = Instantiate(_uiScreens[screenName]);
         view.Load(controllable);
         _loaded.Add(screenName, view);
-    }
-
-    public void HideScreen(UIScreenName screenName)
-    {
-        UIView view = _loaded[screenName];
-        if (view != null)
-        {
-            Destroy(view.gameObject);
-            _loaded.Remove(screenName);
-        }
     }
 }

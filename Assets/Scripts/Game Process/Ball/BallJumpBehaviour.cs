@@ -18,7 +18,7 @@ public class BallJumpBehaviour : MonoBehaviour
 
     public void Jump()
     {
-        if (_jumped)
+        if (_jumped == true)
         {
             return;
         }
