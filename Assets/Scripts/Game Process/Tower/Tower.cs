@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
-public class Tower
+[RequireComponent(typeof(Rigidbody))]
+public class Tower : MonoBehaviour
 {
-    public List<Platform> _platforms;
-
+    private List<Platform> _platforms;
+    private Rigidbody _self;
+    
     public IReadOnlyList<Platform> Platforms => _platforms.AsReadOnly();
     public StartPlatform StartPlatform { get; private set; }
     public FinishPlatform FinishPlatform { get; private set; }
@@ -11,11 +14,21 @@ public class Tower
 
     public int PlatformsCount => _platforms.Count + 2;
 
-    public Tower(StartPlatform startPlatform, List<Platform> platforms, FinishPlatform finishPlatform, Beam beam)
+    private void Awake()
+    {
+        _self = GetComponent<Rigidbody>();
+    }
+
+    public void Init(StartPlatform startPlatform, List<Platform> platforms, FinishPlatform finishPlatform, Beam beam)
     {
         StartPlatform = startPlatform;
         _platforms = platforms;
         FinishPlatform = finishPlatform;
         Beam = beam;
+    }
+
+    public void Pause()
+    {
+        _self.isKinematic = true;
     }
 }

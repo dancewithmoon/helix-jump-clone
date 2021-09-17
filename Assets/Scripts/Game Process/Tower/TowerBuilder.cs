@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Tower))]
 public class TowerBuilder : MonoBehaviour
 {
     private const float ADDITIONAL_SCALE = 3;
@@ -10,9 +11,14 @@ public class TowerBuilder : MonoBehaviour
     private TowerSettings _settings;
     private readonly float _startAndFinishAdditionalScale = 0.5f;
 
-    public Tower BuildedTower { get; private set; }
+    public Tower Tower { get; private set; }
     private float BeamScaleY => _settings.LevelCount * DistanceBetweenPlatformsCoef + _startAndFinishAdditionalScale*2 + ADDITIONAL_SCALE;
     private float DistanceBetweenPlatformsCoef => DISTANCE_BETWEEN_PLATFORMS / 2f;
+
+    private void Awake()
+    {
+        Tower = GetComponent<Tower>();
+    }
 
     public IEnumerator Build(TowerSettings settings)
     {
@@ -43,7 +49,7 @@ public class TowerBuilder : MonoBehaviour
         spawnPosition.y -= DISTANCE_BETWEEN_PLATFORMS;
         var finishPlatform = SpawnPlatform(_settings.FinishPlatform, spawnPosition, RotationType.Default) as FinishPlatform;
 
-        BuildedTower = new Tower(startPlatform, platforms, finishPlatform, beam);
+        Tower.Init(startPlatform, platforms, finishPlatform, beam);
     }
 
     private Platform SpawnPlatform(Platform prefab, Vector3 spawnPosition, RotationType rotationType)

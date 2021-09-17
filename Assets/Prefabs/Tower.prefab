@@ -9,11 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9008179090356048914}
+  - component: {fileID: 7957088739224717448}
   - component: {fileID: 9008179090356048917}
   - component: {fileID: 9008179090356048919}
   - component: {fileID: 9008179090356048916}
   m_Layer: 0
-  m_Name: Tower1
+  m_Name: Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,6 +34,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7957088739224717448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9008179090356048915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03e40e40f26c5d948bf519972a523a7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &9008179090356048917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45,19 +58,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 624b66dc073d2864ab29ee8212c51db5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelCount: 10
-  _additionalScale: 3
-  _distanceBetweenPlatforms: 2
-  _maxPlatformRotation: 0
-  _beamPrefab: {fileID: 153021157818875840, guid: d5a5c03a6d7069044afd4b1ad42f79ab,
-    type: 3}
-  _startPlatform: {fileID: 3477164675963103174, guid: 8fd40d756df6c2644a64b59170f2acc9,
-    type: 3}
-  _finishPlatform: {fileID: -5729118876597317215, guid: 790e3c80a226ee549ae4424caffdb1c2,
-    type: 3}
-  _platforms:
-  - {fileID: 1944491116100227591, guid: a051c9339ed7f3e4191df33039b97c9a, type: 3}
-  - {fileID: -4128453047219300281, guid: 296165e50cbcf6c4b91c8b32158c5131, type: 3}
 --- !u!114 &9008179090356048919
 MonoBehaviour:
   m_ObjectHideFlags: 0

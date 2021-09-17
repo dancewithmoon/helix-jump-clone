@@ -40,7 +40,7 @@ public class LevelSwitcher : MonoBehaviour, IControllable
 
         _currentLevel = Instantiate(_levels[levelId]);
         LevelStarted?.Invoke(_currentLevel);
-        _currentLevel.Generate();
+        _currentLevel.Generator.Generate();
     }
 
     private void OnDestroy()
